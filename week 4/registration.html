@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Engaging Registration Form</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .password-strength {
+            height: 6px;
+            width: 100%;
+            background-color: #e5e7eb;
+            border-radius: 3px;
+            margin-top: 6px;
+            overflow: hidden;
+        }
+        .password-strength div {
+            height: 100%;
+            border-radius: 3px;
+            transition: width 0.4s ease, background-color 0.4s ease;
+        }
+        .input-focus {
+            transition: all 0.3s ease;
+        }
+        .input-focus:focus {
+            transform: scale(1.02);
+            box-shadow: 0 0 8px rgba(59, 130, 246, 0.5);
+        }
+        .btn-loading::after {
+            content: '';
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid #ffffff;
+            border-radius: 50%;
+            border-top-color: transparent;
+            animation: spin 1s linear infinite;
+            margin-left: 8px;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-indigo-100 via-purple-100 to-pink-100 flex items-center justify-center min-h-screen">
+    <div class="bg-white p-8 rounded-xl shadow-2xl w-full max-w-md transform transition-all hover:scale-105">
+        <h2 class="text-3xl font-extrabold text-center text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600 mb-6 animate-pulse">Join the Fun!</h2>
+        <form id="registrationForm" action="/submit" method="post" novalidate>
+            <div class="mb-5">
+                <label for="name" class="block text-sm font-semibold text-gray-700">Full Name</label>
+                <input type="text" id="name" name="name" class="mt-2 w-full p-3 border border-gray-300 rounded-lg input-focus bg-gray-50 hover:bg-gray-100 focus:border-purple-500" required>
+                <p id="nameError" class="text-red-500 text-sm mt-2 hidden"></p>
+            </div>
+            <div class="mb-5">
+                <label for="email" class="block text-sm font-semibold text-gray-700">Email</label>
+                <input type="email" id="email" name="email" class="mt-2 w-full p-3 border border-gray-300 rounded-lg input-focus bg-gray-50 hover:bg-gray-100 focus:border-purple-500" required>
+                <p id="emailError" class="text-red-500 text-sm mt-2 hidden"></p>
+            </div>
+            <div class="mb-5">
+                <label for="phone" class="block text-sm font-semibold text-gray-700">Phone Number</label>
+                <input type="tel" id="phone" name="phone" class="mt-2 w-full p-3 border border-gray-300 rounded-lg input-focus bg-gray-50 hover:bg-gray-100 focus:border-purple-500" required>
+                <p id="phoneError" class="text-red-500 text-sm mt-2 hidden"></p>
+            </div>
+            <div class="mb-5">
+                <label for="password" class="block text-sm font-semibold text-gray-700">Password</label>
+                <input type="password" id="password" name="password" class="mt-2 w-full p-3 border border-gray-300 rounded-lg input-focus bg-gray-50 hover:bg-gray-100 focus:border-purple-500" required>
+                <div class="password-strength"><div id="strengthBar"></div></div>
+                <p id="passwordError" class="text-red-500 text-sm mt-2 hidden"></p>
+            </div>
+            <button type="submit" id="submitBtn" class="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white p-3 rounded-lg hover:from-purple-700 hover:to-pink-700 transition duration-300 font-semibold">Register</button>
+        </form>
+    </div>
+    <script>
+        const form = document.getElementById('registrationForm');
+        const nameInput = document.getElementById('name');
+        const emailInput = document.getElementById('email');
+        const phoneInput = document.getElementById('phone');
